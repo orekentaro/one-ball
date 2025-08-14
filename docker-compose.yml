@@ -18,7 +18,7 @@ services:
       - db
   nginx:
     image: nginx:1.25
-    container_name: nginx_proxy
+    container_name: nginx
     ports:
       - "80:80"
     volumes:
@@ -27,7 +27,7 @@ services:
       - api
   db:
     image: postgres:16
-    container_name: postgres_db
+    container_name: db
     restart: always
     environment:
       POSTGRES_DB: oneball_db
