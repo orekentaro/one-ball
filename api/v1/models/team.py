@@ -8,7 +8,7 @@ from v1.models import CreateAndUpdateDateTimeMixin
 class Team(models.Model):
     """球団名DB"""
 
-    name = models.CharField(max_length=100, verbose_name=_("チーム名"))
+    name = models.CharField(max_length=100, unique=True, verbose_name=_("チーム名"))
     short_name = models.CharField(max_length=50, unique=True, verbose_name=_("短縮名"))
     alphabet = models.CharField(
         max_length=10, unique=True, verbose_name=_("アルファベット")
@@ -26,14 +26,21 @@ class Team(models.Model):
         return self.name
 
 
-class WinLose(CreateAndUpdateDateTimeMixin):
-    """勝敗DB"""
+class BaseWinLose(CreateAndUpdateDateTimeMixin):
+    """勝敗ベースクラス"""
 
     team = models.ForeignKey(Team, on_delete=models.CASCADE, verbose_name=_("チーム"))
     year = models.PositiveIntegerField(verbose_name=_("年度"))
     wins = models.IntegerField(verbose_name=_("勝利"), default=0)
     losses = models.IntegerField(verbose_name=_("敗戦"), default=0)
     draws = models.IntegerField(verbose_name=_("引分"), default=0)
+
+    class Meta:
+        abstract = True
+
+
+class WinLose(BaseWinLose):
+    """勝敗DB"""
 
     class Meta:
         verbose_name = _("勝敗")
@@ -43,7 +50,7 @@ class WinLose(CreateAndUpdateDateTimeMixin):
         return f"{self.team.name} {self.year}年: {self.wins}勝 {self.losses}敗 {self.draws}分"
 
 
-class WinLoseHistory(WinLose):
+class WinLoseHistory(BaseWinLose):
     """勝敗履歴DB"""
 
     date = models.DateField(verbose_name=_("日付"), auto_now_add=True)

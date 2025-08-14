@@ -3,8 +3,8 @@ from django.utils.translation import gettext_lazy as _
 from v1.models import CreateAndUpdateDateTimeMixin
 
 
-class Grades(CreateAndUpdateDateTimeMixin):
-    """成績DB"""
+class BaseGrades(CreateAndUpdateDateTimeMixin):
+    """成績ベースクラス"""
 
     player = models.ForeignKey(
         "v1.Player", on_delete=models.PROTECT, verbose_name=_("選手")
@@ -112,6 +112,13 @@ class Grades(CreateAndUpdateDateTimeMixin):
     whip = models.FloatField(verbose_name=_("WHIP"), null=True, default=None)
 
     class Meta:
+        abstract = True
+
+
+class Grades(BaseGrades):
+    """成績DB"""
+
+    class Meta:
         verbose_name = _("成績")
         verbose_name_plural = _("成績")
 
@@ -123,7 +130,7 @@ class Grades(CreateAndUpdateDateTimeMixin):
         CreateAndUpdateDateTimeMixin.save(self, *args, **kwargs)
 
 
-class GradesHistory(Grades):
+class GradesHistory(BaseGrades):
     """成績履歴DB"""
 
     date = models.DateField(_("日付"), auto_now_add=True)

@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",
+    # First party libraries
     "v1",
+    # Third party libraries
+    "rest_framework",
+    "safedelete",
 ]
 
 MIDDLEWARE = [

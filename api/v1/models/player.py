@@ -1,8 +1,12 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from safedelete.models import SafeDeleteModel
+
+from v1.constance import Constants
+from v1.models import CreateAndUpdateDateTimeMixin
 
 
-class Player(models.Model):
+class Player(SafeDeleteModel, CreateAndUpdateDateTimeMixin):
     """選手名DB"""
 
     team = models.ForeignKey(
@@ -13,31 +17,22 @@ class Player(models.Model):
     position = models.CharField(
         max_length=50,
         verbose_name=_("登録ポジション"),
-        choices=(
-            ("P", _("投手")),
-            ("C", _("捕手")),
-            ("IF", _("内野手")),
-            ("OF", _("外野手")),
-        ),
+        choices=Constants.POSITION,
     )
     height = models.PositiveIntegerField(verbose_name=_("身長"))
     weight = models.PositiveIntegerField(verbose_name=_("体重"))
     birthday = models.DateField(verbose_name=_("生年月日"))
+    age = models.PositiveIntegerField(verbose_name=_("年齢"), default=0)
+    years = models.PositiveIntegerField(verbose_name=_("年数"), default=0)
     pitch = models.CharField(
         max_length=50,
         verbose_name=_("投球"),
-        choices=(
-            ("R", _("右投げ")),
-            ("L", _("左投げ")),
-        ),
+        choices=Constants.PITCH,
     )
     bat = models.CharField(
         max_length=50,
         verbose_name=_("打席"),
-        choices=(
-            ("R", _("右打ち")),
-            ("L", _("左打ち")),
-        ),
+        choices=Constants.BAT,
     )
     salary = models.PositiveIntegerField(verbose_name=_("年俸"), default=0)
 

@@ -8,6 +8,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "django" },
+    { name = "django-safedelete" },
     { name = "djangorestframework" },
     { name = "psycopg2-binary" },
 ]
@@ -23,6 +24,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "django", specifier = ">=5.1,<6.0" },
+    { name = "django-safedelete", specifier = ">=1.4.1" },
     { name = "djangorestframework", specifier = "<=3.16.1" },
     { name = "psycopg2-binary", specifier = ">=2.9.10" },
 ]
@@ -119,6 +121,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/62/9b/779f853c3d2d58b9e08346061ff3e331cdec3fe3f53aae509e256412a593/django-5.2.5.tar.gz", hash = "sha256:0745b25681b129a77aae3d4f6549b62d3913d74407831abaa0d9021a03954bae", size = 10859748, upload-time = "2025-08-06T08:26:29.978Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/9d/6e/98a1d23648e0085bb5825326af17612ecd8fc76be0ce96ea4dc35e17b926/django-5.2.5-py3-none-any.whl", hash = "sha256:2b2ada0ee8a5ff743a40e2b9820d1f8e24c11bac9ae6469cd548f0057ea6ddcd", size = 8302999, upload-time = "2025-08-06T08:26:23.562Z" },
+]
+
+[[package]]
+name = "django-safedelete"
+version = "1.4.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "packaging" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a8/f0/d1a4ade3d89946445bdbe103fa376371dbaee0c94ae0cb570c7383ac7950/django_safedelete-1.4.1.tar.gz", hash = "sha256:f5919d627519fd6d766a3616ee15554a19e13edcb5f7fb9d86503cd71a6986d0", size = 32570, upload-time = "2025-03-05T08:39:44.932Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/25/68/26c713fca48ba7b631b64f14e9d3057cecb5b3aba93d8d05554fcf6bb5e5/django_safedelete-1.4.1-py3-none-any.whl", hash = "sha256:c4232445e4ec3a2b72ac9002130377088c8e541bba5a5af4cf8936ec3ff0afde", size = 44084, upload-time = "2025-03-05T08:39:43.497Z" },
 ]
 
 [[package]]
