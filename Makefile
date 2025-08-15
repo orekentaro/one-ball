@@ -8,3 +8,5 @@ init_data:
 init: init_data run
 install:
 	docker compose exec api uv pip install --system --requirement pyproject.toml
+add:
+	docker compose exec api uv add $(p)
