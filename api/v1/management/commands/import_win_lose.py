@@ -3,7 +3,7 @@ from logging import getLogger
 from django.core.management.base import BaseCommand
 from django.utils.timezone import localdate
 
-from v1.utils.web_crawling import get_table_to_list
+from v1.utils.web_crawling import get_one_table_to_list
 from v1.models.team import Team, WinLose
 
 logger = getLogger(__name__)
@@ -13,7 +13,7 @@ class Command(BaseCommand):
     help = "初期データを作成します"
 
     def handle(self, *args, **options) -> None:
-        data = get_table_to_list("https://baseball.yahoo.co.jp/npb/standings/")
+        data = get_one_table_to_list("https://baseball.yahoo.co.jp/npb/standings/")
         if not data:
             logger.error("データの取得に失敗しました。URLを確認してください。")
             return
