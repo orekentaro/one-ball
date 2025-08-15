@@ -53,6 +53,7 @@ class Command(BaseCommand):
                 reader = csv.DictReader(file)
                 for row in reader:
                     objects.append(Player(team=team, **row))
+            logger.info(f"{team.name} の選手データを読み込みました。")
 
         Player.objects.bulk_create(objects)
         logger.info("選手の初期データが作成されました。")

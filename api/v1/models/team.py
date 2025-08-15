@@ -29,11 +29,23 @@ class Team(models.Model):
 class BaseWinLose(CreateAndUpdateDateTimeMixin):
     """勝敗ベースクラス"""
 
-    team = models.ForeignKey(Team, on_delete=models.CASCADE, verbose_name=_("チーム"))
+    team = models.ForeignKey(Team, on_delete=models.PROTECT, verbose_name=_("チーム"))
     year = models.PositiveIntegerField(verbose_name=_("年度"))
-    wins = models.IntegerField(verbose_name=_("勝利"), default=0)
-    losses = models.IntegerField(verbose_name=_("敗戦"), default=0)
-    draws = models.IntegerField(verbose_name=_("引分"), default=0)
+    rank = models.PositiveIntegerField(verbose_name=_("順位"))
+    games = models.PositiveIntegerField(verbose_name=_("試合"), default=0)
+    wins = models.PositiveIntegerField(verbose_name=_("勝利"), default=0)
+    losses = models.PositiveIntegerField(verbose_name=_("敗戦"), default=0)
+    draws = models.PositiveIntegerField(verbose_name=_("引分"), default=0)
+    win_rate = models.CharField(verbose_name=_("勝率"), default=".000")
+    games_behind = models.CharField(verbose_name=_("勝差"), default="0.0")
+    remaining_games = models.PositiveIntegerField(verbose_name=_("残試合"), default=0)
+    runs_scored = models.PositiveIntegerField(verbose_name=_("得点"), default=0)
+    runs_allowed = models.PositiveIntegerField(verbose_name=_("失点"), default=0)
+    home_runs = models.PositiveIntegerField(verbose_name=_("本塁打"), default=0)
+    stolen_bases = models.PositiveIntegerField(verbose_name=_("盗塁"), default=0)
+    batting_average = models.CharField(verbose_name=_("打率"), default=".000")
+    era = models.CharField(verbose_name=_("防御率"), default="0.00")
+    errors = models.PositiveIntegerField(verbose_name=_("失策"), default=0)
 
     class Meta:
         abstract = True

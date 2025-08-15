@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Third party libraries
     "rest_framework",
     "safedelete",
+    "bs4",
 ]
 
 MIDDLEWARE = [
