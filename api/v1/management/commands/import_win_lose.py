@@ -49,9 +49,9 @@ class Command(BaseCommand):
                 if serializer.is_valid():
                     serializer.save()
                     logger.info(
-                        f"WinLose data for {team.short_name} in {today} saved successfully."
+                        f" {team.short_name} の {today} のデータが正常に保存されました。"
                     )
                 else:
                     logger.error(
-                        f"Validation failed for {team.short_name}: {serializer.errors}"
+                        f"順位の取得に失敗しました。 {team.short_name}: {serializer.errors}"
                     )
