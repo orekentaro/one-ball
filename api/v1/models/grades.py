@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from v1.models import CreateAndUpdateDateTimeMixin
+
 
 class BaseGrades(models.Model):
     """成績ベースクラス"""
@@ -57,7 +59,7 @@ class BaseFielderGrades(BaseGrades):
         abstract = True
 
 
-class FielderGrades(BaseFielderGrades):
+class FielderGrades(BaseFielderGrades, CreateAndUpdateDateTimeMixin):
     """野手成績DB"""
 
     class Meta:
@@ -138,7 +140,7 @@ class BasePitcherGrades(BaseGrades):
         abstract = True
 
 
-class PitcherGrades(BasePitcherGrades):
+class PitcherGrades(BasePitcherGrades, CreateAndUpdateDateTimeMixin):
     """投手成績DB"""
 
     class Meta:
