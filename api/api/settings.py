@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "safedelete",
     "bs4",
+    "django_celery_results",
 ]
 
 MIDDLEWARE = [
@@ -155,4 +156,13 @@ LOGGING = {
             "propagate": True,
         },
     },
+}
+# TODO: 後ほど環境変数に移行する
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_RESULT_BACKEND = "django-db"
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "cache_table",
+    }
 }

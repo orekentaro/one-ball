@@ -37,5 +37,19 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+  celery:
+    build:
+      context: ./api
+    command: celery -A api worker --loglevel=info
+    volumes:
+      - ./api:/app
+    working_dir: /app
+    depends_on:
+      - api
+      - redis
 volumes:
   postgres_data:

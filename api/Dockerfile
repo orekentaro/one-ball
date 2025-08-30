@@ -20,11 +20,11 @@ RUN pip install --no-cache-dir uv && \
 # アプリケーションコードコピー
 COPY . .
 # wait-for-it.shのみ明示的にコピー＆実行権限付与
-COPY wait-for-it.sh /app/wait-for-it.sh
-RUN chmod +x /app/wait-for-it.sh
+COPY scripts/wait-for-it.sh /app/scripts/wait-for-it.sh
+RUN chmod +x /app/scripts/wait-for-it.sh
 
 # ポート開放
 EXPOSE 8000
 
 # サーバ起動コマンド（PostgreSQLの起動を待機）
-CMD ["/app/wait-for-it.sh", "db", "5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["/app/scripts/wait-for-it.sh", "db", "5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
