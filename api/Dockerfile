@@ -1,6 +1,6 @@
 
 # ベースイメージ
-FROM python:3.12-slim
+FROM python:3.13-slim
 
 # wait-for-it.sh用にnetcat(nc)をインストール
 RUN apt-get update && apt-get install -y netcat-openbsd && rm -rf /var/lib/apt/lists/*
